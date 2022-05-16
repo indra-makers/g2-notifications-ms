@@ -1,5 +1,4 @@
 package com.co.indra.coinmarketcap.notifications.repositories;
-import com.co.indra.coinmarketcap.notifications.model.*;
 import com.co.indra.coinmarketcap.notifications.model.entities.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
