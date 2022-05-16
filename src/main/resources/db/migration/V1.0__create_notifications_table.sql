@@ -7,6 +7,6 @@ CREATE TABLE public.tbl_Notifications(
     mailUser TEXT NOT NULL,
     subject TEXT NOT NULL,
     phonenumber TEXT NOT NULL,
-    PRIMARY KEY (id_notification),
-    FOREIGN KEY (mailUser) REFERENCES tbl_Users(mail_user) --Reference to tbl_users in g2-users-ms
+    PRIMARY KEY (id_notification)
+    --FOREIGN KEY (mailUser) REFERENCES tbl_Users(mail_user) --Reference to tbl_users in g2-users-ms
 );
