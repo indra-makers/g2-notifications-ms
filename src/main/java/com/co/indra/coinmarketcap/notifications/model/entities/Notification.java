@@ -3,42 +3,43 @@ package com.co.indra.coinmarketcap.notifications.model.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Notification implements Serializable {
-    private String id_notification ;
-    private String typeof ;
+    private String idNotification ;
+    private String typeOf ;
     private String message ;
-    private Timestamp sent_at ;
+    private Date sentAt ;
     private String mailUser ;
     private String subject ;
-    private String phonenumber;
+    private String phoneNumber;
 
     public Notification(){}
 
-    public Notification(String id_notification, String typeof, String message, Timestamp sent_at, String mailUser, String subject, String phonenumber){
-        this.id_notification = id_notification;
-        this.typeof = typeof;
+    public Notification(String idNotification, String typeOf, String message, Timestamp sentAt, String mailUser, String subject, String phoneNumber){
+        this.idNotification = idNotification;
+        this.typeOf = typeOf;
         this.message = message;
-        this.sent_at = sent_at;
+        this.sentAt = sentAt;
         this.mailUser = mailUser;
         this.subject = subject;
-        this.phonenumber = phonenumber;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String get_id_notification() {
-        return id_notification;
+    public String get_idNotification() {
+        return idNotification;
     }
 
-    public void set_id_notification(String id_notification) {
-        this.id_notification = id_notification;
+    public void set_idNotification(String idNotification) {
+        this.idNotification = idNotification;
     }
 
-    public String getTypeof() {
-        return typeof;
+    public String gettypeOf() {
+        return typeOf;
     }
 
-    public void setTypeof(String typeof) {
-        this.typeof = typeof;
+    public void settypeOf(String typeOf) {
+        this.typeOf = typeOf;
     }
 
     public String getMessage() {
@@ -49,12 +50,12 @@ public class Notification implements Serializable {
         this.message = message;
     }
 
-    public Timestamp getSent_at() {
-        return sent_at;
+    public Date getSent_at() {
+        return sentAt;
     }
 
     public void setSent_at(Timestamp sent_at) {
-        this.sent_at = sent_at;
+        this.sentAt = sent_at;
     }
 
     public String getMailUser() {
@@ -73,11 +74,11 @@ public class Notification implements Serializable {
         this.subject = subject;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getphoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setphoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

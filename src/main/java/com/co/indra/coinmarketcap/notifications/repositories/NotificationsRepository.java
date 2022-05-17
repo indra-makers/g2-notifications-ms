@@ -13,13 +13,13 @@ class NotificationsRowMapper implements RowMapper<Notification> {
         @Override
         public Notification mapRow(ResultSet rs, int rowNum) throws SQLException {
             Notification notification = new Notification();
-            notification.set_id_notification(rs.getString("id_notification"));
-            notification.setTypeof(rs.getString("typeof"));
+            notification.set_idNotification(rs.getString("idnotification"));
+            notification.settypeOf(rs.getString("typeof"));
             notification.setMessage(rs.getString("message"));
             notification.setSent_at(rs.getTimestamp("sent_at"));
             notification.setMailUser(rs.getString("mailuser"));
             notification.setSubject(rs.getString("subject"));
-            notification.setPhonenumber(rs.getString("phonenumber"));
+            notification.setphoneNumber(rs.getString("phonenumber"));
             return notification;
         }
 }
