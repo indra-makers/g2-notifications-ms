@@ -1,5 +1,6 @@
 package com.co.indra.coinmarketcap.notifications.services;
 
+import com.co.indra.coinmarketcap.notifications.ApiTwillio.ApiService.TwillioService;
 import com.co.indra.coinmarketcap.notifications.model.entities.Notification;
 import com.co.indra.coinmarketcap.notifications.repositories.NotificationsRepository;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,11 @@ public class NotificationService {
     @Autowired
     private NotificationsRepository notificationsRepository;
 
+    @Autowired
+    private TwillioService twillioService;
+
     public void registerNotification(Notification notification) {
+        twillioService.twillioService(notification.getphoneNumber(), notification.getMessage());
         notificationsRepository.sendNotification(notification);
     }
 
