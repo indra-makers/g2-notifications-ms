@@ -17,11 +17,13 @@ public class SendGridClient {
 
     @Value("${api.sendgrid.apikey}")
     private String sendGridApiKey;
+    @Value("${api.sendgrid.from}")
+    private String sendGridFrom;
 
     public void sendMail(String subject, String body, String to) throws IOException {
         Content content = new Content("text/plain", body);
-        Mail mail = new Mail(new Email("desarrolloenequipoeam@gmail.com"), subject, new Email(to), content);
-        SendGrid sg = new SendGrid(System.getenv(sendGridApiKey));
+        Mail mail = new Mail(new Email(sendGridFrom), subject, new Email(to), content);
+        SendGrid sg = new SendGrid(sendGridApiKey);
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
