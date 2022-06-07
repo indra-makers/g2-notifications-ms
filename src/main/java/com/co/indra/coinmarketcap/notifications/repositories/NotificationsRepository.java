@@ -41,4 +41,6 @@ public class NotificationsRepository {
                 "SELECT id_notification, typeof, message, sent_at, mailuser, subject, phonenumber FROM tbl_notifications WHERE mailuser=?",
                 new NotificationsRowMapper(), mailuser);
     }
+
+
 }

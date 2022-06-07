@@ -5,4 +5,6 @@ public class Routes {
 
     public static final String NOTIFICATION_VIEWLOG_BY_EMAIL = "/by-email/{mailuser}";
 
+    public static final String SMS_SEND_PATH= "/sms/send";
+
 }
