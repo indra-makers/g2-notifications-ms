@@ -1,5 +1,6 @@
 package com.co.indra.coinmarketcap.notifications.services;
 
+import com.co.indra.coinmarketcap.notifications.apiSendGrid.clients.SendEmailApiClient;
 import com.co.indra.coinmarketcap.notifications.model.entities.Notification;
 import com.co.indra.coinmarketcap.notifications.repositories.NotificationsRepository;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,11 @@ public class NotificationService {
     @Autowired
     private NotificationsRepository notificationsRepository;
 
+    @Autowired
+    private SendEmailApiClient sendEmailApiClient;
+
     public void registerNotification(Notification notification) {
+        sendEmailApiClient.sendEmail(notification.getSubject(), notification.getMessage(), notification.getMailUser());
         notificationsRepository.sendNotification(notification);
     }
 
