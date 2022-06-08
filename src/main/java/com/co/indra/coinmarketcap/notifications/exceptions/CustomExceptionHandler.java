@@ -39,4 +39,5 @@ public class CustomExceptionHandler {
         return new ErrorResponse(500, exception.getMessage());
     }
 
+
 }

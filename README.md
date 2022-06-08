@@ -3,44 +3,93 @@
 
 This module provides an API to perform actions like send an email and send SMS as notification service
 
-- Consider that this project doesn't have a SMS Provider in real world
-- Will only use for notificy sign-up or another actions indicated by the project's master
-- Consider that this project doesn't have an email smtp server to send emails, may use a SMTP established server or 3rd party provider.
+- Consider that this project uses Twilio SMS Api for SMS service and SendGrid API for email service
+- Will only use for notify sign-up or another actions indicated by the project's master
 
 ## Composite
 
 This module use some attributes explained below:
 
-| Attribute | Description or usage |
-| ------ | ------ |
-| id_notification¹ | An unique identification by notification performed|
-| typeof | A notification type selector to indicate system if needs to send an email or SMS |
-| message | Notification message or content |
-| sent_at¹ | A timestamp value to specify when the notification was sent |
-| mailuser² | Address where the email will be send |
-| subject² | A short flag to indicate what the notification is about |
-| phonenumber² | Phone number where the notification will be send |
-¹ = Don't declare this in service request, it will be processed and used in logical environment
-² = If system request a SMS will be send 'mailuser' and 'subject' with 'null' value, any value typed on these parameters will be not treated for a SMS request. Likewise if system request an email, 'phonenumber' will be 'null' or any other value.
+- User model
+
+| Attribute    | Description or usage                                        |
+|--------------|-------------------------------------------------------------|
+| user_id      | An identification associated to an user in the system       |
+| phone_number | A number phone to use as SMS recipient                      |
+| mail_user    | Address where the email will be send                        |
+
+
+- Notification model
+
+| Attribute    | Description or usage                                                             |
+|--------------|----------------------------------------------------------------------------------|
+| user_id      | An identification associated to an user in the system                            |
+| typeof       | A notification type selector to indicate system if needs to send an email or SMS |
+| subject      | A short flag to indicate what the notification is about                          |
+| message      | Notification message or content                                                  |
+| sent_at      | A timestamp value to specify when the notification was sent                      |
+
+
 ## Usage
-Due to the 'typeof' attribute system can send a notification as email using an email address or a sms using a phone number
+First of all you must add an user. Notification service will not work if there is no an associated user.
+
+Add an user trought the API:
+```sh
+{
+    "userId": "YourUserId-OrUsername",
+    "mailUser": "youremail@domain.com",
+    "phoneNumber": "+123456789012"
+}
+```
+
+Perform a SMS notification send request:
+```sh
+{
+    "userId": "YourUserId-OrUsername",
+    "typeOf": "SMS",
+    "subject": "N/A",
+    "message": "Content"
+}
+```
+_'subject' can be sent empty, it doesn't matter what you write there, it will be overwritten with "N/A"._
+_'message' can exceed the 160 char limit, you have to write something short._
+
+Perform a MAIL notification send request:
+```sh
+{
+    "userId": "YourUserId-OrUsername",
+    "typeOf": "MAIL",
+    "subject": "A little text about that you are trying to notify",
+    "message": "Content"
+}
+```
+
+You will get one of these code status depending on the execution of the request:
+
+| Code | How to prevent or repair                                                                                          |
+|------|-------------------------------------------------------------------------------------------------------------------|
+| 1    | Verify your userId/username or if you know it's not registered, do it.                                            |
+| 2    | You're trying to register a user that already exists. Try another.                                                |
+| 3    | You're trying to register a user without specifying its username.                                                 |
+| 4    | You only can specify between SMS and MAIL to perform a notification.                                              |
+| 5    | Email address has not a correct format and/or phone number has not a correct format.                              |
+| 6    | You're trying to send an email without specifying a subject. Provide a one and try again.                         |
+| 7    | You're trying to send a notification without specify the content. Why? Write something.                           |
+| 8    | You choose to send a SMS notification but the content exceeds the char limit allowed. Short the text.             |
+| 9    | You have all correct but the server that performs the SMS sending isn't given an answer or its having a failure.  |
+| 10   | You have all correct but the server that performs the MAIL sending isn't given an answer or its having a failure. |
+| 404  | You're trying to request a service in a wrong route.                                                              |
+| 400  | You're requesting a service with an incorrect way.                                                                |
+| 500  | You're good but our service is having problems.                                                                   |
 
 Treat below as a function declaration
 
-Send notification as email:
-```sh
-send_notification("email","Hi this is a test!","aquiles@bailo.com","Mail test",null)
-```
+## Restrictions
 
-Send notification as SMS:
+For _'phone_number'_ you have to provide a correct format like: +570123456789012.
+For _'mail_user'_ you have to provide a correct format of email address: something@mydomain.com
+For _'typeOf'_ you have to choose between SMS or an Email
 
-```sh
-send_notification("sms","Hi this is a test!",null,null,"3210123456")
-```
-
-> Note: `mailuser` is required for email procedure, it will be validated as an email address written correctly.
-
-> Note: `phonenumber` is required for sms procedure, it will be validated as a phone number written correctly.
 
 ## License
 
