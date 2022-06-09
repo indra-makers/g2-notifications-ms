@@ -14,13 +14,11 @@ class NotificationsRowMapper implements RowMapper<Notification> {
         @Override
         public Notification mapRow(ResultSet rs, int rowNum) throws SQLException {
             Notification notification = new Notification();
-            notification.set_idNotification(rs.getString("id_notification"));
-            notification.settypeOf(rs.getString("typeof"));
-            notification.setMessage(rs.getString("message"));
-            notification.setSent_at(rs.getTimestamp("sent_at"));
-            notification.setMailUser(rs.getString("mailuser"));
+            notification.setUserId(rs.getString("user_id"));
+            notification.setTypeOf(rs.getString("type_of"));
             notification.setSubject(rs.getString("subject"));
-            notification.setphoneNumber(rs.getString("phonenumber"));
+            notification.setMessage(rs.getString("message"));
+            notification.setSentAt(rs.getTimestamp("sent_at"));
             return notification;
         }
 }
@@ -31,14 +29,23 @@ public class NotificationsRepository {
     private JdbcTemplate template;
 
     public void sendNotification(Notification notification) {
-        template.update("INSERT INTO tbl_notifications( typeof, message, mailuser, subject, phonenumber) values(?,?,?,?,?)",
-                notification.gettypeOf(), notification.getMessage(), notification.getMailUser(),
-                notification.getSubject(), notification.getphoneNumber());
+        template.update("INSERT INTO tbl_notifications( user_id, type_of, subject, message) values(?,?,?,?)",
+                notification.getUserId(),
+                notification.getTypeOf(),
+                notification.getSubject(),
+                notification.getMessage()
+        );
     }
 
-    public List<Notification> logNotificationsByEmail(String mailuser) {
+    public List<Notification> getNotificationsByUserId(String userId) {
         return template.query(
-                "SELECT id_notification, typeof, message, sent_at, mailuser, subject, phonenumber FROM tbl_notifications WHERE mailuser=?",
-                new NotificationsRowMapper(), mailuser);
+                "SELECT user_id, type_of, subject, message, sent_at FROM tbl_notifications WHERE user_id=?",
+                new NotificationsRowMapper(), userId);
+    }
+
+    public List<Notification> getAllNotifications() {
+        return template.query(
+                "SELECT user_id, type_of, subject, message, sent_at FROM tbl_notifications",
+                new NotificationsRowMapper());
     }
 }

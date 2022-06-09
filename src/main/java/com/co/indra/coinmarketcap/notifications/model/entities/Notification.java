@@ -6,64 +6,37 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Notification implements Serializable {
-    private String idNotification ;
-    private String typeOf ;
-    private String message ;
-    private Date sentAt ;
-    private String mailUser ;
-    private String subject ;
-    private String phoneNumber;
+
+    private String userId;
+    private String typeOf;
+    private String subject;
+    private String message;
+    private Date sentAt;
 
     public Notification(){}
 
-    public Notification(String idNotification, String typeOf, String message, Timestamp sentAt, String mailUser, String subject, String phoneNumber){
-        this.idNotification = idNotification;
+    public Notification(String userId, String typeOf, String subject, String message, Timestamp sentAt){
+        this.userId = userId;
         this.typeOf = typeOf;
+        this.subject = subject;
         this.message = message;
         this.sentAt = sentAt;
-        this.mailUser = mailUser;
-        this.subject = subject;
-        this.phoneNumber = phoneNumber;
     }
 
-    public String get_idNotification() {
-        return idNotification;
+    public String getUserId() {
+        return userId;
     }
 
-    public void set_idNotification(String idNotification) {
-        this.idNotification = idNotification;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String gettypeOf() {
+    public String getTypeOf() {
         return typeOf;
     }
 
-    public void settypeOf(String typeOf) {
+    public void setTypeOf(String typeOf) {
         this.typeOf = typeOf;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Date getSent_at() {
-        return sentAt;
-    }
-
-    public void setSent_at(Timestamp sent_at) {
-        this.sentAt = sent_at;
-    }
-
-    public String getMailUser() {
-        return mailUser;
-    }
-
-    public void setMailUser(String mailUser) {
-        this.mailUser = mailUser;
     }
 
     public String getSubject() {
@@ -74,11 +47,19 @@ public class Notification implements Serializable {
         this.subject = subject;
     }
 
-    public String getphoneNumber() {
-        return phoneNumber;
+    public String getMessage() {
+        return message;
     }
 
-    public void setphoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Date getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
     }
 }
