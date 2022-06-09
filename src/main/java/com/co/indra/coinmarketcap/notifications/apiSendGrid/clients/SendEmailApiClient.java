@@ -24,7 +24,7 @@ public class SendEmailApiClient {
 
     public void sendEmail(String subject, String body, String to){
         Email from = new Email(sendGridFrom);
-        Email para = new Email(to.toString());
+        Email para = new Email(to);
         Content content = new Content("text/plain",body);
         Mail mail = new Mail(from, subject, para, content);
 
