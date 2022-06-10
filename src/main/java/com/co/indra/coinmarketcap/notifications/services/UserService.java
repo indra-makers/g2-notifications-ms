@@ -46,6 +46,10 @@ public class UserService {
         }
     }
 
+    public void saveUser(String userId, String mailUser, String phoneNumber) {
+        usersRepository.addUser(new Users(userId, mailUser, phoneNumber));
+    }
+
     public List<Users> getUserById(String userId) {
         return usersRepository.listUserById(userId);
     }
