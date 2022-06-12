@@ -53,4 +53,8 @@ public class UserService {
     public List<Users> getAllUsers(){
         return usersRepository.listAllUsers();
     }
+
+    public void saveUser(String userId, String mailUser, String phoneNumber) {
+        usersRepository.addUser(new Users(userId, mailUser, phoneNumber));
+    }
 }
