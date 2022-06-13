@@ -19,7 +19,7 @@ public class SmsSender {
     public void sendSMS(String to, String message){
         Twilio.init(ACCOUNT_SID,AUTH_TOKEN);
         Message mssg = Message.creator(new PhoneNumber(to), new PhoneNumber("+19895677952"), message).create();
-        //System.out.println(mssg.getSid());
+        System.out.println(mssg.getSid());
 
     }
 }

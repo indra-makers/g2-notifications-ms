@@ -52,7 +52,8 @@ Perform a SMS notification send request:
 }
 ```
 _'subject' can be sent empty, it doesn't matter what you write there, it will be overwritten with "N/A"._
-_'message' can exceed the 160 char limit, you have to write something short._
+
+_'message' can't exceed the 160 char limit, you have to write something short._
 
 Perform a MAIL notification send request:
 ```sh
