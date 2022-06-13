@@ -9,7 +9,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue Queue(){
-        return new Queue("user_notifications");
+        return new Queue("users");
     }
 
 }

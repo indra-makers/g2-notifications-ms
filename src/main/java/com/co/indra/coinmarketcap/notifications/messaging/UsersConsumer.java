@@ -19,11 +19,11 @@ public class UsersConsumer {
     @Autowired
     private UserService userService;
 
-    @RabbitListener(queues = "user_notifications")
+    @RabbitListener(queues = "users")
     public void listenerQueue(String message){
         try{
             Users user = objectMapper.readValue(message, Users.class);
-            userService.saveUser(user.getUserId(), user.getMailUser(), user.getPhoneNumber());
+            userService.registerUser(user);
         }catch(JsonProcessingException exc){
             exc.printStackTrace();
         }
