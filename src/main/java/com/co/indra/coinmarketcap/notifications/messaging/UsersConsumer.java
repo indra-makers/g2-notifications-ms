@@ -18,13 +18,11 @@ public class UsersConsumer {
     private UserService userService;
 
     @RabbitListener(queues = "test_users")
-
     public void listenerTestQueue(String massage) {
         System.out.println(massage);
         try {
             Users user = objectMapper.readValue(massage, Users.class);
-            userService.saveUser(user.getUserId(), user.getMailUser(), user.getPhoneNumber());
-            System.out.println(user.getMailUser());
+            userService.saveUser(user);
         } catch (JsonProcessingException exc) {
             exc.printStackTrace();
         }

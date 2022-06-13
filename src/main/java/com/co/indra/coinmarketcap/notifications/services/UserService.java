@@ -1,6 +1,7 @@
 package com.co.indra.coinmarketcap.notifications.services;
 import com.co.indra.coinmarketcap.notifications.config.ErrorCodes;
 import com.co.indra.coinmarketcap.notifications.exceptions.BusinessException;
+import com.co.indra.coinmarketcap.notifications.messaging.UsersConsumer;
 import com.co.indra.coinmarketcap.notifications.model.entities.Users;
 import com.co.indra.coinmarketcap.notifications.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.regex.Pattern;
 public class UserService {
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private UsersConsumer usersConsumer;
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private static final Pattern VALID_PHONE_NUMBER_REGEX = Pattern.compile("\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|\n" +
@@ -54,7 +58,8 @@ public class UserService {
         return usersRepository.listAllUsers();
     }
 
-    public void saveUser(String userId, String mailUser, String phoneNumber) {
-        usersRepository.addUser(new Users(userId, mailUser, phoneNumber));
+    public void saveUser(Users users) {
+        usersRepository.addUser(users);
+
     }
 }
