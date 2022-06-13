@@ -1,12 +1,19 @@
 package com.co.indra.coinmarketcap.notifications.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class Users implements Serializable {
+    @JsonProperty("username")
     private String userId ;
+
+    @JsonProperty("mail")
     private String mailUser ;
+
+    @JsonProperty("phone")
     private String phoneNumber ;
 
     public Users(){}

@@ -53,4 +53,8 @@ public class UserService {
     public List<Users> getAllUsers(){
         return usersRepository.listAllUsers();
     }
+
+    public void saveUserDataNotification(Users users){
+        usersRepository.addUser(users);
+    }
 }
