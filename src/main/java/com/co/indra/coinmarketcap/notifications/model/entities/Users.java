@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Users implements Serializable {
+
     private String userId ;
     private String mailUser ;
     private String phoneNumber ;
