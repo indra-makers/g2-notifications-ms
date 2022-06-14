@@ -10,4 +10,9 @@ public class RabbiConfig {
     public Queue testQueue() {
         return new Queue("users");
     }
+
+    @Bean
+    public Queue testQueue1() {
+        return new Queue("alerts");
+    }
 }
